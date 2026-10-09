@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="16dp">
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:gravity="center" android:text="Your Progress" android:textSize="22sp" />
+        <TextView android:id="@+id/tvSubtitle"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:gravity="center" android:layout_marginTop="4dp"
+            android:text="DETECTED LANGUAGE: PYTHON" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:background="@drawable/bg_card"
+            android:orientation="vertical" android:gravity="center" android:padding="24dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Average Understanding Score" android:textSize="16sp" />
+            <TextView android:id="@+id/tvAverage"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:textSize="28sp" android:textStyle="bold" />
+            <TextView android:id="@+id/tvImprovement"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" android:background="@drawable/bg_card" android:padding="8dp">
+            <com.github.mikephil.charting.charts.LineChart android:id="@+id/lineChart"
+                android:layout_width="match_parent" android:layout_height="220dp" />
+        </FrameLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" android:background="@drawable/bg_card"
+            android:orientation="vertical" android:padding="16dp">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:gravity="center" android:text="Language performance:" android:textSize="16sp" />
+            <include android:id="@+id/rowPython" layout="@layout/view_language_row"
+                android:layout_width="match_parent" android:layout_height="wrap_content" />
+            <include android:id="@+id/rowCSharp" layout="@layout/view_language_row"
+                android:layout_width="match_parent" android:layout_height="wrap_content" />
+            <include android:id="@+id/rowJava" layout="@layout/view_language_row"
+                android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" android:background="@drawable/bg_card"
+            android:orientation="vertical" android:padding="16dp">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:gravity="center" android:text="SESSION HISTORY:"
+                android:textSize="16sp" android:layout_marginBottom="8dp" />
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvHistory"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnNewSession"
+            android:layout_width="match_parent" android:layout_height="56dp"
+            android:layout_marginTop="16dp" android:text="NEW SESSION"
+            app:backgroundTint="@color/brand_dark" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/screen_bg">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:gravity="center"
+        android:background="@color/white" android:padding="12dp">
+        <TextView android:id="@+id/tvTitle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="New Session" android:textSize="20sp" />
+        <TextView android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" android:text="Paste Your Code Below" android:textSize="16sp" />
+    </LinearLayout>
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:background="@drawable/bg_card">
+        <TextView android:id="@+id/tvChatPlaceholder"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal" android:layout_marginTop="8dp"
+            android:text="(CHAT SESSION)" />
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvChat"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:padding="8dp" />
+    </FrameLayout>
+
+    <TextView android:id="@+id/tvInputLabel"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center" android:padding="8dp" android:text="PASTE CODE HERE:" />
+
+    <EditText android:id="@+id/etInput"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginStart="12dp" android:layout_marginEnd="12dp"
+        android:background="@color/white" android:padding="10dp"
+        android:minHeight="80dp" android:maxLines="6" android:gravity="top"
+        android:fontFamily="monospace" android:hint="Paste your code here"
+        android:inputType="textMultiLine|textNoSuggestions" />
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnAnalyse"
+        android:layout_width="match_parent" android:layout_height="56dp"
+        android:layout_margin="12dp" android:text="ANALYSE QUESTION"
+        app:backgroundTint="@color/brand_dark" />
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnEnd"
+        android:layout_width="match_parent" android:layout_height="48dp"
+        android:layout_marginStart="24dp" android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp" android:text="END SESSION"
+        app:backgroundTint="@color/brand_dark" />
+</LinearLayout>

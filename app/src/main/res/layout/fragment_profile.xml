@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center_horizontal"
+    android:background="@color/white" android:padding="24dp">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="CodeVerify" android:textSize="22sp" android:textStyle="bold" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" android:text="PROFILE" android:textSize="18sp" />
+
+    <ImageView android:layout_width="96dp" android:layout_height="96dp"
+        android:layout_marginTop="12dp" android:src="@drawable/ic_profile"
+        android:contentDescription="Profile picture" />
+
+    <TextView android:id="@+id/tvName"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" android:text="NAME" android:textSize="18sp" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="24dp" android:text="EMAIL:" />
+    <TextView android:id="@+id/tvEmail"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="4dp" android:text="EXAMPLE@gmail.com" android:textSize="16sp" />
+
+    <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
+
+    <TextView android:id="@+id/tvEditProfile"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:padding="10dp" android:text="Edit Profile" android:textSize="16sp" />
+    <TextView android:id="@+id/tvChangePassword"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:padding="10dp" android:text="Change password" android:textSize="16sp" />
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnLogout"
+        android:layout_width="match_parent" android:layout_height="48dp"
+        android:layout_marginTop="8dp" android:text="LOG OUT"
+        app:backgroundTint="@color/brand_dark" />
+</LinearLayout>

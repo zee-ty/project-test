@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/screen_bg">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:gravity="center"
+        android:background="@color/white" android:padding="12dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="CODE UNDERSTANDING SESSION" android:textSize="20sp" />
+        <TextView android:id="@+id/tvLanguage"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" android:text="DETECTED LANGUAGE: PYTHON" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:background="@drawable/bg_card"
+        android:orientation="vertical" android:gravity="center_horizontal" android:padding="24dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="SESSION COMPLETE:" android:textSize="18sp" android:textStyle="bold" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Your Understanding Score:" />
+        <TextView android:id="@+id/tvScore"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:textSize="40sp" android:textStyle="bold" />
+        <TextView android:id="@+id/tvAnswered"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" android:text="FEEDBACK:" android:textStyle="bold" />
+        <TextView android:id="@+id/tvFeedback"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:gravity="center"
+            android:text="You demonstrated a good understanding of the coding principles we discussed" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnNewSession"
+        android:layout_width="match_parent" android:layout_height="56dp"
+        android:layout_margin="12dp" android:text="NEW SESSION"
+        app:backgroundTint="@color/brand_dark" />
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnViewProgress"
+        android:layout_width="match_parent" android:layout_height="48dp"
+        android:layout_marginStart="24dp" android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp" android:text="VIEW PROGRESS"
+        app:backgroundTint="@color/brand_dark" />
+</LinearLayout>
