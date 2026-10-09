@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment android:id="@+id/dashboardFragment"
+        android:name="com.itmbaq1.itmda_groupproj.DashboardFragment" android:label="Home">
+        <action android:id="@+id/action_dashboard_to_session" app:destination="@id/sessionFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/sessionFragment"
+        android:name="com.itmbaq1.itmda_groupproj.SessionFragment" android:label="Session">
+        <action android:id="@+id/action_session_to_results"
+            app:destination="@id/resultsFragment"
+            app:popUpTo="@id/sessionFragment" app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment android:id="@+id/resultsFragment"
+        android:name="com.itmbaq1.itmda_groupproj.ResultsFragment" android:label="Results">
+        <action android:id="@+id/action_results_to_session"
+            app:destination="@id/sessionFragment"
+            app:popUpTo="@id/resultsFragment" app:popUpToInclusive="true" />
+        <action android:id="@+id/action_results_to_progress" app:destination="@id/progressFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/progressFragment"
+        android:name="com.itmbaq1.itmda_groupproj.ProgressFragment" android:label="Progress">
+        <action android:id="@+id/action_progress_to_session" app:destination="@id/sessionFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/profileFragment"
+        android:name="com.itmbaq1.itmda_groupproj.ProfileFragment" android:label="Profile" />
+</navigation>
