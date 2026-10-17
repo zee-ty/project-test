@@ -13,3 +13,11 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# C# generated build files
+backend-csharp/bin/
+backend-csharp/obj/
+
+# Local development settings and secrets
+backend-csharp/appsettings.Development.json
+backend-csharp/.env
