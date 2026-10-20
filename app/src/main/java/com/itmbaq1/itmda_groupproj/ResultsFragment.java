@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -30,13 +31,21 @@ public class ResultsFragment extends Fragment {
             binding.tvLanguage.setText("DETECTED LANGUAGE: " + args.getString("language", "-").toUpperCase());
             binding.tvScore.setText(args.getInt("score") + "%");
             binding.tvAnswered.setText(args.getInt("answered") + "/" + args.getInt("total") + " Questions answered");
-            // must do: set tvFeedback from the AI evaluation
+            String feedback = args.getString("feedback", "");
+            if (!feedback.isEmpty()) binding.tvFeedback.setText(feedback);
         }
+
         NavController nav = NavHostFragment.findNavController(this);
-        binding.btnNewSession.setOnClickListener(v -> nav.navigate(R.id.action_results_to_session));
+        binding.btnNewSession.setOnClickListener(v -> {
+            new ViewModelProvider(requireActivity()).get(SessionViewModel.class).reset();
+            nav.navigate(R.id.action_results_to_session);
+        });
         binding.btnViewProgress.setOnClickListener(v -> nav.navigate(R.id.action_results_to_progress));
     }
 
     @Override
-    public void onDestroyView() { super.onDestroyView(); binding = null; }
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

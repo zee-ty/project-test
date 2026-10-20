@@ -9,7 +9,11 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.8.5")
     implementation("androidx.navigation:navigation-ui:2.8.5")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0") // Progress line chart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-livedata:2.8.7")
 }
 
 android {
