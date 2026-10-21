@@ -8,4 +8,5 @@ public class CodeVerifyOptions
     public int MaxCodeChars { get; set; } = 6000;
     public int MaxAnswerChars { get; set; } = 1000;
     public bool UseFakeAi { get; set; } = false;
+    public bool UseInMemoryStore { get; set; } = false;
 }
