@@ -52,9 +52,35 @@
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:gravity="center" android:text="SESSION HISTORY:"
                 android:textSize="16sp" android:layout_marginBottom="8dp" />
-            <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvHistory"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
+
+            <ProgressBar
+                android:id="@+id/progressHistory"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/tvHistoryStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:padding="8dp"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false" />
+
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton android:id="@+id/btnNewSession"
