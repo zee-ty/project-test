@@ -63,6 +63,8 @@ app.UseAuthStub();
 
 app.MapGet("/api/health", () => Results.Json(new { status = "ok" }));
 app.MapSessionEndpoints();
+app.MapDashBoardEndpoints();
+app.MapProgressEndpoints();
 
 app.MapFallback(() => Results.Json(new { error = "Not found." }, statusCode: 404));
 

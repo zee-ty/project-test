@@ -83,4 +83,19 @@ public class InMemorySessionStore : ISessionStore
             return Task.CompletedTask;
         }
     }
+
+    
+    public Task<List<Session>> GetSessionsByUserAsync(int userId)
+    {
+        lock (_lock)
+        {
+            var sessions = _sessions.Values
+                .Where(s => s.UserId == userId)
+                .Select(s => s.Clone())
+                .ToList();
+
+            return Task.FromResult(sessions);
+        }
+    }
+
 }
