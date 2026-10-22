@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class ApiClient {
 
-    // Keep the backend port used by the incoming backend branch.
+    // Keeping the backend port used by the incoming backend branch.
     public static final String BASE_URL = "http://10.0.2.2:5212/";
 
     private static Retrofit retrofit;

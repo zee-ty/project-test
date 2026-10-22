@@ -282,11 +282,13 @@ public class ProgressFragment extends Fragment {
 
     private void setupChart(float[] scores) {
 
-        if (scores == null || scores.length == 0) {
+        if (scores == null || scores.length < 2) {
             binding.lineChart.clear();
+
             binding.lineChart.setNoDataText(
-                    "No progress data available yet."
+                    "Complete at least two sessions to see your progress chart."
             );
+
             binding.lineChart.invalidate();
             return;
         }

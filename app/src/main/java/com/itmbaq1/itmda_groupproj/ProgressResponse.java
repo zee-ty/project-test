@@ -20,8 +20,11 @@ public class ProgressResponse {
 
     public static class ScoreHistoryPoint {
 
-        @SerializedName("date")
-        public String date;
+        @SerializedName("sessionId")
+        public int sessionId;
+
+        @SerializedName("completedAt")
+        public String completedAt;
 
         @SerializedName("score")
         public Double score;
@@ -52,8 +55,14 @@ public class ProgressResponse {
         @SerializedName("score")
         public Integer score;
 
+        @SerializedName("questionsAnswered")
+        public int questionsAnswered;
+
         @SerializedName("submittedAt")
         public String submittedAt;
+
+        @SerializedName("completedAt")
+        public String completedAt;
     }
 }
 
