@@ -21,3 +21,7 @@ backend-csharp/obj/
 # Local development settings and secrets
 backend-csharp/appsettings.Development.json
 backend-csharp/.env
+
+# Ignore generated .NET build files
+**/bin/
+**/obj/
