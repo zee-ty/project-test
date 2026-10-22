@@ -20,6 +20,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyItemInserted(messages.size() - 1);
     }
 
+    public void setMessages(List<ChatMessage> items) {
+        messages.clear();
+        messages.addAll(items);
+        notifyDataSetChanged();
+    }
+
     static class MsgHolder extends RecyclerView.ViewHolder {
         final TextView tv;
         MsgHolder(View v) { super(v); tv = v.findViewById(R.id.tvMessage); }

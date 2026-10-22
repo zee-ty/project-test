@@ -1,10 +1,12 @@
 using System.Threading.RateLimiting;
 using CodeVerifyBackend.Auth;
+using CodeVerifyBackend.Data;
 using CodeVerifyBackend.Endpoints;
 using CodeVerifyBackend.Models;
 using CodeVerifyBackend.Services;
 using Microsoft.AspNetCore.RateLimiting;
 using Google.GenAI;
+using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,8 +36,22 @@ builder.Services.AddRateLimiter(o =>
     };
 });
 
-//(Part A) changes THIS line to the database version.
-builder.Services.AddSingleton<ISessionStore, InMemorySessionStore>();
+// Where sessions are saved: Part A's MySQL database, or temporary memory for testing.
+if (options.UseInMemoryStore)
+{
+    builder.Services.AddSingleton<ISessionStore, InMemorySessionStore>();
+}
+else
+{
+    var connectionString = builder.Configuration.GetConnectionString("Default");
+    if (string.IsNullOrWhiteSpace(connectionString))
+    {
+        Console.Error.WriteLine("Missing database connection string. Run: dotnet user-secrets set \"ConnectionStrings:Default\" \"your-connection-string\"");
+        Console.Error.WriteLine("(Or set \"UseInMemoryStore\": true in appsettings.json to run without a database.)");
+        Environment.Exit(1);
+    }
+    builder.Services.AddSingleton<ISessionStore>(new MySqlSessionStore(connectionString!));
+}
 
 // Which AI to use our made one or api:
 if (options.UseFakeAi)
@@ -59,11 +75,38 @@ var app = builder.Build();
 
 app.UseApiErrorHandling();
 app.UseRateLimiter();
-app.UseAuthStub();        
+app.UseAuthStub();
 
 app.MapGet("/api/health", () => Results.Json(new { status = "ok" }));
+
+// Part A's database check: opens the MySQL connection and asks which database it reached.
+app.MapGet("/api/database-test", async (IConfiguration configuration) =>
+{
+    try
+    {
+        await using var connection = Database.CreateConnection(configuration);
+        await connection.OpenAsync();
+
+        await using var command = new MySqlCommand("SELECT DATABASE()", connection);
+        var databaseName = await command.ExecuteScalarAsync();
+
+        return Results.Ok(new
+        {
+            status = "Database connection successful",
+            database = databaseName
+        });
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(
+            title: "Database connection failed",
+            detail: ex.Message
+        );
+    }
+});
+
 app.MapSessionEndpoints();
-app.MapDashBoardEndpoints();
+app.MapDashboardEndpoints();
 app.MapProgressEndpoints();
 
 app.MapFallback(() => Results.Json(new { error = "Not found." }, statusCode: 404));

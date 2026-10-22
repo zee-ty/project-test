@@ -1,37 +1,42 @@
-
 using CodeVerifyBackend.Models;
 using CodeVerifyBackend.Services;
+using CodeVerifyBackend.Auth;
 
 namespace CodeVerifyBackend.Endpoints;
 
 public static class DashboardEndpoints
 {
-    public static void MapDashboardEndpoints(this WebApplication app)
+    public static IEndpointRouteBuilder MapDashboardEndpoints(
+        this IEndpointRouteBuilder app)
     {
         app.MapGet("/api/dashboard", async (
-            HttpContext ctx,
+            HttpContext context,
             ISessionStore store) =>
         {
-            var userId = ctx.GetUserId();
-
+            var userId = context.GetUserId();
             var sessions = await store.GetSessionsByUserAsync(userId);
 
-            var completedSessions = sessions
-                .Where(s => s.FinishedAt.HasValue &&
-                            s.OverallScore.HasValue)
+            var completed = sessions
+                .Where(s => s.FinishedAt != null && s.OverallScore != null)
                 .ToList();
 
-            double? averageScore = completedSessions.Count > 0
-                ? completedSessions.Average(s => s.OverallScore!.Value)
-                : null;
+            var averageScore = completed.Count == 0
+                ? 0.0
+                : Math.Round(
+                    completed.Average(s => (double)s.OverallScore!.Value), 2);
 
-            var favouriteLanguage = completedSessions
+            var questionsAnswered = sessions
+                .SelectMany(s => s.Answers)
+                .Count(a => a.UserId == userId);
+
+            var favouriteLanguage = sessions
                 .Where(s => !string.IsNullOrWhiteSpace(s.Language))
-                .GroupBy(s => s.Language)
+                .GroupBy(s => s.Language.Trim(),
+                    StringComparer.OrdinalIgnoreCase)
                 .OrderByDescending(g => g.Count())
                 .ThenBy(g => g.Key)
                 .Select(g => g.Key)
-                .FirstOrDefault();
+                .FirstOrDefault() ?? "N/A";
 
             var recentSessions = sessions
                 .OrderByDescending(s => s.SubmittedAt)
@@ -46,18 +51,17 @@ public static class DashboardEndpoints
                 })
                 .ToList();
 
-            var response = new DashboardResponse
+            return Results.Ok(new DashboardResponse
             {
                 AverageScore = averageScore,
-                SessionsCompleted = completedSessions.Count,
-                QuestionsAnswered = sessions
-                    .SelectMany(s => s.Answers)
-                    .Count(a => a.UserId == userId),
+                SessionsCompleted = completed.Count,
+                QuestionsAnswered = questionsAnswered,
                 FavouriteLanguage = favouriteLanguage,
                 RecentSessions = recentSessions
-            };
-
-            return Results.Ok(response);
+            });
         });
+
+        return app;
     }
 }
+

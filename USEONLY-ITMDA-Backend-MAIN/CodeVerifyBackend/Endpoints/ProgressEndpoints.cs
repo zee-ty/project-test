@@ -1,6 +1,6 @@
-
 using CodeVerifyBackend.Models;
 using CodeVerifyBackend.Services;
+using CodeVerifyBackend.Auth;
 
 namespace CodeVerifyBackend.Endpoints;
 
