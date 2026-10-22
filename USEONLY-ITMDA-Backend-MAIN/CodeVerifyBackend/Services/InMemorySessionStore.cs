@@ -43,6 +43,19 @@ public class InMemorySessionStore : ISessionStore
         }
     }
 
+    public Task<List<Session>> GetSessionsByUserAsync(int userId)
+    {
+        lock (_lock)
+        {
+            var sessions = _sessions.Values
+                .Where(s => s.UserId == userId)
+                .Select(s => s.Clone())
+                .ToList();
+
+            return Task.FromResult(sessions);
+        }
+    }
+
     public Task<int> SaveAnswerAsync(int sessionId, int questionId, int userId, string answerText)
     {
         lock (_lock)
