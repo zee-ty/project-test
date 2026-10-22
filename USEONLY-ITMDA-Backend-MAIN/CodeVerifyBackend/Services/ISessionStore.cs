@@ -2,8 +2,6 @@ using CodeVerifyBackend.Models;
 
 namespace CodeVerifyBackend.Services;
 
-// Everything Part C needs from the database. Part A writes a real version
-// of this and edits Program.cs.
 public interface ISessionStore
 {
     // Saves a new session (CodeSubmission) with its questions (Question table).
@@ -23,5 +21,3 @@ public interface ISessionStore
     // Saves the final score when the session ends.
     Task FinishSessionAsync(int sessionId, int overallScore, string summaryFeedback);
 }
-
-//Tshepang this is needed to be edited by you for part A integration:
