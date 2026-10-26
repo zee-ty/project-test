@@ -105,9 +105,10 @@ app.MapGet("/api/database-test", async (IConfiguration configuration) =>
     }
 });
 
+app.MapAuthEndpoints();
 app.MapSessionEndpoints();
-// app.MapDashboardEndpoints();
-// app.MapProgressEndpoints();
+app.MapDashboardEndpoints();
+app.MapProgressEndpoints();
 
 app.MapFallback(() => Results.Json(new { error = "Not found." }, statusCode: 404));
 
