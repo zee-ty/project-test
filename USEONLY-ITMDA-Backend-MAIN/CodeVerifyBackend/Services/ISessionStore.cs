@@ -20,4 +20,6 @@ public interface ISessionStore
 
     // Saves the final score when the session ends.
     Task FinishSessionAsync(int sessionId, int overallScore, string summaryFeedback);
+    // Retrieves all sessions belonging to a specific user.
+    Task<List<Session>> GetSessionsByUserAsync(int userId);
 }
